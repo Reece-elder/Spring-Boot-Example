@@ -37,3 +37,9 @@ NOTE - The tables are not actually connected yet
 
 
 ## Tutorial - Add Services and Controller to New Entity
+
+Create:  
+- Igloo Repo
+- Igloo Service
+- Igloo Controller
+

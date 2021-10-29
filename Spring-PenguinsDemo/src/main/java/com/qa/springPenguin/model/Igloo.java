@@ -60,11 +60,11 @@ public class Igloo {
 		this.capacity = capacity;
 	}
 
-	public Set<Penguin> getPenguins() {
+	public List<Penguin> getPenguins() {
 		return penguins;
 	}
 
-	public void setPenguins(Set<Penguin> penguins) {
+	public void setPenguins(List<Penguin> penguins) {
 		this.penguins = penguins;
 	}
 
