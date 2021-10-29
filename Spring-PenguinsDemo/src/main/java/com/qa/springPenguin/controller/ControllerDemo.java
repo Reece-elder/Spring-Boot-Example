@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.springPenguin.model.Penguin;
+import com.qa.springPenguin.services.Services;
 
 @RestController
 public class ControllerDemo {
 	
 	public ArrayList<Penguin> PenguinList = new ArrayList<>();
+	private Services penguinService = new Services();
 	
 	@GetMapping("/hello")
 	public String helloWorld() {
@@ -26,12 +28,13 @@ public class ControllerDemo {
 	
 	@PostMapping("/createPenguin")
 		public ResponseEntity<String> createPenguin(@RequestBody Penguin penguin){
-			System.out.println(penguin);
-			PenguinList.add(penguin);
+//			System.out.println(penguin);
+//			PenguinList.add(penguin);
+			penguinService.createPenguin(penguin);
 			
 			String stringResponse = "Penguin added!";
 			
-			Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+//			Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
 			
 			ResponseEntity<String> response = new ResponseEntity<String>(stringResponse, HttpStatus.CREATED);
 			return response;
@@ -42,7 +45,7 @@ public class ControllerDemo {
 	@GetMapping("/get/{index}")
 		public ResponseEntity<Penguin> getPenguin(@PathVariable("index") int index) {
 		
-			Penguin penguinResponse = PenguinList.get(index);
+			Penguin penguinResponse = penguinService.getByIndex(index);
 			
 			ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(penguinResponse, HttpStatus.ACCEPTED);
 			return response;
