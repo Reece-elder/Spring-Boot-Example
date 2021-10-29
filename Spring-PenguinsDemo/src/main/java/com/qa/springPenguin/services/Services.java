@@ -2,8 +2,11 @@ package com.qa.springPenguin.services;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.qa.springPenguin.model.Penguin;
 
+@Service
 public class Services {
 	
 	private ArrayList<Penguin> penguinList = new ArrayList<>();

@@ -1,0 +1,1 @@
+Spring boot is able to derive simple custom queries from method names, allowing more complex CRUD functionality
