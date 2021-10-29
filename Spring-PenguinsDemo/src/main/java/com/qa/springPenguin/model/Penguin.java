@@ -42,8 +42,6 @@ public class Penguin {
 		this.happyFeet = happyFeet;
 	}
 
-
-
 	public long getId() {
 		return id;
 	}

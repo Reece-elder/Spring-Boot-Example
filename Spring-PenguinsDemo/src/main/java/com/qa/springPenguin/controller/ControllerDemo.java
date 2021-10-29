@@ -1,6 +1,7 @@
 package com.qa.springPenguin.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.springPenguin.model.Penguin;
 import com.qa.springPenguin.services.Services;
+import com.qa.springPenguin.services.ServicesDB;
 
 @RestController
 public class ControllerDemo {
 	
-	private Services penguinService = new Services();
+//	private ServicesDB penguinService = new ServicesDB();
 	
+	private ServicesDB penguinService;
+	
+	public ControllerDemo(ServicesDB penguinService) {
+		super();
+		this.penguinService = penguinService;
+	}
+
 	@GetMapping("/hello")
 	public String helloWorld() {
 		return "Hello Everyone :p";
@@ -29,6 +38,7 @@ public class ControllerDemo {
 		public ResponseEntity<String> createPenguin(@RequestBody Penguin penguin){
 //			System.out.println(penguin);
 //			PenguinList.add(penguin);
+		System.out.println("pre service");
 			penguinService.createPenguin(penguin);
 			
 			String stringResponse = "Penguin added!";
@@ -44,14 +54,14 @@ public class ControllerDemo {
 	@GetMapping("/get/{index}")
 		public ResponseEntity<Penguin> getPenguin(@PathVariable("index") int index) {
 		
-			Penguin penguinResponse = penguinService.getByIndex(index);
+			Penguin penguinResponse = penguinService.getPenguinId(index);
 			
 			ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(penguinResponse, HttpStatus.ACCEPTED);
 			return response;
 	}
 	
 	@GetMapping("/getAll")
-	public ArrayList<Penguin> getAll() {
+	public List<Penguin> getAll() {
 		return penguinService.getAllPenguins();
 	}
 	
@@ -75,6 +85,11 @@ public class ControllerDemo {
 		ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(responseBody, HttpStatus.CREATED);
 		return response;
 		
+	}
+	
+	@GetMapping("/get/name/{name}")
+	public List<Penguin> getPenguinByName(@PathVariable String name){
+		return penguinService.findByName(name);
 	}
 
 }
