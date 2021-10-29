@@ -86,5 +86,10 @@ public class ControllerDemo {
 		return response;
 		
 	}
+	
+	@GetMapping("/get/name/{name}")
+	public List<Penguin> getPenguinByName(@PathVariable String name){
+		return penguinService.findByName(name);
+	}
 
 }

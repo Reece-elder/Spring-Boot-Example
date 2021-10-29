@@ -60,6 +60,13 @@ public class ServicesDB {
 	}
 	
 	
+	// Adding custom queries
+	
+	public List<Penguin> findByName(String name) {
+		return repo.findByName(name);
+	}
+	
+	
 	
 	
 
