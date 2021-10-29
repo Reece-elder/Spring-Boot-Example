@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.springPenguin.model.Penguin;
+import com.qa.springPenguin.services.Services;
 
 @RestController
 public class ControllerDemo {
 	
-	public ArrayList<Penguin> PenguinList = new ArrayList<>();
+	private Services penguinService = new Services();
 	
 	@GetMapping("/hello")
 	public String helloWorld() {
@@ -26,12 +27,13 @@ public class ControllerDemo {
 	
 	@PostMapping("/createPenguin")
 		public ResponseEntity<String> createPenguin(@RequestBody Penguin penguin){
-			System.out.println(penguin);
-			PenguinList.add(penguin);
+//			System.out.println(penguin);
+//			PenguinList.add(penguin);
+			penguinService.createPenguin(penguin);
 			
 			String stringResponse = "Penguin added!";
 			
-			Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+//			Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
 			
 			ResponseEntity<String> response = new ResponseEntity<String>(stringResponse, HttpStatus.CREATED);
 			return response;
@@ -42,20 +44,20 @@ public class ControllerDemo {
 	@GetMapping("/get/{index}")
 		public ResponseEntity<Penguin> getPenguin(@PathVariable("index") int index) {
 		
-			Penguin penguinResponse = PenguinList.get(index);
+			Penguin penguinResponse = penguinService.getByIndex(index);
 			
 			ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(penguinResponse, HttpStatus.ACCEPTED);
 			return response;
 	}
 	
 	@GetMapping("/getAll")
-	public String getAll() {
-		return PenguinList.toString();
+	public ArrayList<Penguin> getAll() {
+		return penguinService.getAllPenguins();
 	}
 	
 	@DeleteMapping("/delete/{index}")
 	public ResponseEntity<String> deletePenguin(@PathVariable("index") int index) {
-		PenguinList.remove(index);
+		penguinService.deletePenguin(index);
 		String responseString = "Penguin of index " + index + " has been deleted";
 		System.out.println(responseString);
 		ResponseEntity<String> response = new ResponseEntity<String>(responseString, HttpStatus.NO_CONTENT);
@@ -64,9 +66,11 @@ public class ControllerDemo {
 	
 	@PutMapping("/update/{index}")
 	public ResponseEntity<Penguin> updatePenguin(@RequestBody Penguin penguin, @PathVariable("index") int index) {
-		PenguinList.set(index, penguin);
+//		PenguinList.set(index, penguin);
+//		
+//		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
 		
-		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+		Penguin responseBody = penguinService.updatePenguin(penguin, index);
 		
 		ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(responseBody, HttpStatus.CREATED);
 		return response;
