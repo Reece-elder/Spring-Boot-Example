@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Penguin {
@@ -21,6 +22,9 @@ public class Penguin {
 	
 	@Column(unique = false, nullable = false)
 	private boolean happyFeet;
+	
+	@ManyToOne // Many to One relationship
+	private Igloo igloo; // Penguin belongs to some igloo
 	
 	public Penguin() {
 		super();
@@ -42,9 +46,20 @@ public class Penguin {
 		this.happyFeet = happyFeet;
 	}
 
+	// Adding igloo getters and setters
+	public Igloo getIgloo() {
+		return igloo;
+	}
+
+	public void setIgloo(Igloo igloo) {
+		this.igloo = igloo;
+	}
+
+	
 	public long getId() {
 		return id;
 	}
+
 
 	public void setId(long id) {
 		this.id = id;
