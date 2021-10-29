@@ -15,4 +15,3 @@ spring.h2.console.enabled=true
 # create-drop means the table will drop when the application stops running
 # default for embedded databases (such as h2)
 spring.jpa.hibernate.ddl-auto=create-drop
-
