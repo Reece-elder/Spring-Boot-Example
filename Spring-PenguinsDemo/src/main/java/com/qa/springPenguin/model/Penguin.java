@@ -22,11 +22,34 @@ public class Penguin {
 	@Column(unique = false, nullable = false)
 	private boolean happyFeet;
 	
+	public Penguin() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Penguin(String name, int age, boolean happyFeet) {
 		super();
 		this.name = name;
 		this.age = age;
 		this.happyFeet = happyFeet;
+	}
+
+	public Penguin(long id, String name, int age, boolean happyFeet) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.happyFeet = happyFeet;
+	}
+
+
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
