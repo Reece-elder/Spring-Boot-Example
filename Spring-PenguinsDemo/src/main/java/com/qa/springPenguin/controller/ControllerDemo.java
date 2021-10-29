@@ -27,7 +27,7 @@ public class ControllerDemo {
 	public ControllerDemo(ServicesDB penguinService) {
 		super();
 		this.penguinService = penguinService;
-}
+	}
 
 	@GetMapping("/hello")
 	public String helloWorld() {
@@ -51,40 +51,40 @@ public class ControllerDemo {
 	}
 	
 	
-//	@GetMapping("/get/{index}")
-//		public ResponseEntity<Penguin> getPenguin(@PathVariable("index") int index) {
-//		
-//			Penguin penguinResponse = penguinService.getByIndex(index);
-//			
-//			ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(penguinResponse, HttpStatus.ACCEPTED);
-//			return response;
-//	}
+	@GetMapping("/get/{index}")
+		public ResponseEntity<Penguin> getPenguin(@PathVariable("index") int index) {
+		
+			Penguin penguinResponse = penguinService.getPenguinId(index);
+			
+			ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(penguinResponse, HttpStatus.ACCEPTED);
+			return response;
+	}
 	
 	@GetMapping("/getAll")
 	public List<Penguin> getAll() {
 		return penguinService.getAllPenguins();
 	}
 	
-//	@DeleteMapping("/delete/{index}")
-//	public ResponseEntity<String> deletePenguin(@PathVariable("index") int index) {
-//		penguinService.deletePenguin(index);
-//		String responseString = "Penguin of index " + index + " has been deleted";
-//		System.out.println(responseString);
-//		ResponseEntity<String> response = new ResponseEntity<String>(responseString, HttpStatus.NO_CONTENT);
-//		return response;
-//	}
-//	
-//	@PutMapping("/update/{index}")
-//	public ResponseEntity<Penguin> updatePenguin(@RequestBody Penguin penguin, @PathVariable("index") int index) {
-////		PenguinList.set(index, penguin);
-////		
-////		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+	@DeleteMapping("/delete/{index}")
+	public ResponseEntity<String> deletePenguin(@PathVariable("index") int index) {
+		penguinService.deletePenguin(index);
+		String responseString = "Penguin of index " + index + " has been deleted";
+		System.out.println(responseString);
+		ResponseEntity<String> response = new ResponseEntity<String>(responseString, HttpStatus.NO_CONTENT);
+		return response;
+	}
+	
+	@PutMapping("/update/{index}")
+	public ResponseEntity<Penguin> updatePenguin(@RequestBody Penguin penguin, @PathVariable("index") int index) {
+//		PenguinList.set(index, penguin);
 //		
-//		Penguin responseBody = penguinService.updatePenguin(penguin, index);
-//		
-//		ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(responseBody, HttpStatus.CREATED);
-//		return response;
-//		
-//	}
+//		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+		
+		Penguin responseBody = penguinService.updatePenguin(penguin, index);
+		
+		ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(responseBody, HttpStatus.CREATED);
+		return response;
+		
+	}
 
 }

@@ -34,5 +34,33 @@ public class ServicesDB {
 	}
 	
 	
+	public Penguin getPenguinId(long id) {
+		return this.repo.findById(id).get();
+	}
+	
+	public boolean deletePenguin(long id) {
+		repo.deleteById(id);
+		return true;
+	}
+	
+	
+	// Update method
+	public Penguin updatePenguin(Penguin penguin, long id) {
+		
+		Penguin oldPenguin = repo.findById(id).get();
+		
+		oldPenguin.setName(penguin.getName());
+		oldPenguin.setAge(penguin.getAge());
+		oldPenguin.setHappyFeet(penguin.isHappyFeet());
+		
+		Penguin newPenguin = oldPenguin;
+		repo.save(newPenguin);
+		return newPenguin;
+		
+	}
+	
+	
+	
+	
 
 }

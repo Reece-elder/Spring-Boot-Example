@@ -20,3 +20,12 @@ Create a repo interface
 Create methods within the service class
 Modify controller to run new service stuff
 Run code and test with postman
+
+## Tutorial
+
+Go through setting up the rest of the methods
+Test all methods
+
+## Exercise
+
+Make all methods use the DBservice instead
