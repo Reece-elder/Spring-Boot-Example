@@ -54,17 +54,23 @@ public class ControllerDemo {
 	}
 	
 	@DeleteMapping("/delete/{index}")
-	public boolean deletePenguin(@PathVariable("index") int index) {
+	public ResponseEntity<String> deletePenguin(@PathVariable("index") int index) {
 		PenguinList.remove(index);
-		System.out.println("Penguin of index " + index + " has been deleted");
-		return true;
-		
+		String responseString = "Penguin of index " + index + " has been deleted";
+		System.out.println(responseString);
+		ResponseEntity<String> response = new ResponseEntity<String>(responseString, HttpStatus.NO_CONTENT);
+		return response;
 	}
 	
 	@PutMapping("/update/{index}")
-	public String updatePenguin(@RequestBody Penguin penguin, @PathVariable("index") int index) {
+	public ResponseEntity<Penguin> updatePenguin(@RequestBody Penguin penguin, @PathVariable("index") int index) {
 		PenguinList.set(index, penguin);
-		return penguin.toString();
+		
+		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+		
+		ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(responseBody, HttpStatus.CREATED);
+		return response;
+		
 	}
 
 }
