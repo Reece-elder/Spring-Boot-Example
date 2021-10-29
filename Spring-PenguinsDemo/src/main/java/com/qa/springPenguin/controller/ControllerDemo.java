@@ -18,7 +18,6 @@ import com.qa.springPenguin.services.Services;
 @RestController
 public class ControllerDemo {
 	
-	public ArrayList<Penguin> PenguinList = new ArrayList<>();
 	private Services penguinService = new Services();
 	
 	@GetMapping("/hello")
@@ -52,13 +51,13 @@ public class ControllerDemo {
 	}
 	
 	@GetMapping("/getAll")
-	public String getAll() {
-		return PenguinList.toString();
+	public ArrayList<Penguin> getAll() {
+		return penguinService.getAllPenguins();
 	}
 	
 	@DeleteMapping("/delete/{index}")
 	public ResponseEntity<String> deletePenguin(@PathVariable("index") int index) {
-		PenguinList.remove(index);
+		penguinService.deletePenguin(index);
 		String responseString = "Penguin of index " + index + " has been deleted";
 		System.out.println(responseString);
 		ResponseEntity<String> response = new ResponseEntity<String>(responseString, HttpStatus.NO_CONTENT);
@@ -67,9 +66,11 @@ public class ControllerDemo {
 	
 	@PutMapping("/update/{index}")
 	public ResponseEntity<Penguin> updatePenguin(@RequestBody Penguin penguin, @PathVariable("index") int index) {
-		PenguinList.set(index, penguin);
+//		PenguinList.set(index, penguin);
+//		
+//		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
 		
-		Penguin responseBody = PenguinList.get(PenguinList.size() - 1);
+		Penguin responseBody = penguinService.updatePenguin(penguin, index);
 		
 		ResponseEntity<Penguin> response = new ResponseEntity<Penguin>(responseBody, HttpStatus.CREATED);
 		return response;
