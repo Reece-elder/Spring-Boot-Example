@@ -1,9 +1,25 @@
 package com.qa.springPenguin.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Penguin {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increments
+	private long id;
+	
+	@Column(unique = true, nullable = false)
 	private String name;
+	
+	@Column(unique = false, nullable = false)
 	private int age;
+	
+	@Column(unique = false, nullable = false)
 	private boolean happyFeet;
 	
 	public Penguin(String name, int age, boolean happyFeet) {
